@@ -23,6 +23,7 @@ def make_translate( x, y, z ):
                 matrix[i].append(1)
             else:
                 matrix[i].append(0)
+    return matrix
     pass
 
 def make_scale( x, y, z ):
@@ -39,60 +40,67 @@ def make_scale( x, y, z ):
                 matrix[i].append(1)
             else:
                 matrix[i].append(0)
+    return matrix
     pass
 
 def make_rotX( theta ):
     matrix = [[],[],[],[]]
+    theta = math.radians(theta)
     for i in range(len(matrix)):
         for j in range(len(matrix)):
             if i = j:
                 matrix[i].append(1)
             elif i = 1 and j = 1:
-                matrix[i] = math.cos(theta)
+                matrix[i].append(math.cos(theta))
             elif i = 1 and j = 2:
-                matrix[i].append(-math.sin(theta))
+                matrix[i].append(-1 * math.sin(theta))
             elif i = 2 and j = 1:
                 matrix[i].append(math.sin(theta))
             elif i = 2 and j = 2:
                 matrix[i].append(math.cos(theta))
             else:
                 matrix[i].append(0)
+    return matrix
     pass
 
 def make_rotY( theta ):
     matrix = [[],[],[],[]]
+    theta = math.radians(theta)
     for i in range(len(matrix)):
         for j in range(len(matrix)):
             if i = j:
                 matrix[i].append(1)
             elif i = 0 and j = 0:
-                matrix[i] = math.cos(theta)
+                matrix[i].append(math.cos(theta))
             elif i = 2 and j = 0:
-                matrix[i].append(-math.sin(theta))
+                matrix[i].append(-1 * math.sin(theta))
             elif i = 0 and j = 2:
                 matrix[i].append(math.sin(theta))
             elif i = 2 and j = 2:
                 matrix[i].append(math.cos(theta))
             else:
                 matrix[i].append(0)
+    return matrix
     pass
 
 def make_rotZ( theta ):
     matrix = [[],[],[],[]]
+    theta = math.radians(theta)
     for i in range(len(matrix)):
         for j in range(len(matrix)):
             if i = j:
                 matrix[i].append(1)
             elif i = 0 and j = 0:
-                matrix[i] = math.cos(theta)
+                matrix[i].append(math.cos(theta))
             elif i = 0 and j = 1:
-                matrix[i].append(-math.sin(theta))
+                matrix[i].append(-1 * math.sin(theta))
             elif i = 1 and j = 0:
                 matrix[i].append(math.sin(theta))
             elif i = 1 and j = 1:
                 matrix[i].append(math.cos(theta))
             else:
                 matrix[i].append(0)
+    return matrix
     pass
 
 #print the matrix such that it looks like
