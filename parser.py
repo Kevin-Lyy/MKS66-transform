@@ -33,4 +33,74 @@ The file follows the following format:
 See the file script for an example of the file format
 """
 def parse_file( fname, points, transform, screen, color ):
+    with open(fname,"r") as r:
+        filedata = r.read().split('\n')
+    #filedata = open(fname, 'r').read().split('\n')
+    i = 0
+    while i < len(filedata):
+
+        if filedata[i] == "line":
+            boi = [int(j) for j in filedata[i+1].split()]
+            #boi = filedata[i+1].split(' ')
+            #boi = [int(boi[i]) for i in range(len(boi))]
+            add_edge(points,boi[0],boi[1],boi[2],boi[3],boi[4],boi[5])
+            i += 2
+
+        elif filedata[i] == "ident":
+            ident(transform)
+            i += 1
+
+        elif filedata[i] == "scale":
+            boi = [int(j) for j in filedata[i+1].split()]
+            scalematrix = make_scale(boi[0],boi[1],boi[2])
+            matrix_mult(scalematrix,transform)
+            i += 2
+
+        elif filedata[i] == "move":
+            boi = [int(j) for j in filedata[i+1].split()]
+            translateboi = make_translate(boi[0],boi[1],boi[2])
+            matrix_mult(translateboi,transform)
+            i += 2
+
+        elif filedata[i] == "rotate":
+            boi = filedata[i+1].split(' ')
+            axis = boi[0]
+            angleboi = int(boi[1])
+
+            if axis == "x":
+                matrix_mult(make_rotX(angleboi), transform)
+            elif axis == "y":
+                matrix_mult(make_rotY(angleboi), transform)
+            elif axis == "z":
+                matrix_mult(make_rotZ(angleboi), transform)
+            else:
+                print("no")
+
+            i += 2
+
+        elif filedata[i] == "apply":
+            matrix_mult(transform,points)
+            rfix(points)
+            i += 1
+
+        elif filedata[i] == "display":
+            clear_screen(screen)
+            draw_lines(points, screen, color)
+            display(screen)
+            i += 1
+
+        elif filedata[i] == "save":
+            screen = new_screen()
+            draw_lines(points, screen, color)
+            boi = filedata[i+1]
+            save_extension(screen,boi)
+            i += 2
+
+        elif filedata[i] == "quit":
+            i = len(filedata)
+
+        else:
+            i+= 1
+
+
     pass

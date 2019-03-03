@@ -10,98 +10,71 @@ z0  z1  ... zn
 import math
 
 def make_translate( x, y, z ):
-    matrix = [[],[],[],[]]
-    for i in range(len(matrix)):
-        for j in range(len(matrix)):
-            if j == 3 and i == 0:
-                matrix[i].append(x)
-            elif j == 3 and i == 1:
-                matrix[i].append(y)
-            elif j == 3 and i == 2:
-                matrix[i].append(z)
-            elif i == j:
-                matrix[i].append(1)
-            else:
-                matrix[i].append(0)
-    return matrix
-    pass
+    return [[1,0,0,0],[0,1,0,0],[0,0,1,0],[x,y,z,1]]
 
 def make_scale( x, y, z ):
-    matrix = [[],[],[],[]]
-    for i in range(len(matrix)):
-        for j in range(len(matrix)):
-            if i == j and i == 0:
-                matrix[i].append(x)
-            elif i == j and i == 1:
-                matrix[i].append(y)
-            elif i == j and i == 2:
-                matrix[i].append(z)
-            elif i == j and i == 3:
-                matrix[i].append(1)
-            else:
-                matrix[i].append(0)
-    return matrix
-    pass
+    return [[x,0,0,0],[0,y,0,0],[0,0,z,0],[0,0,0,1]]
 
 def make_rotX( theta ):
     matrix = [[],[],[],[]]
-    theta = math.radians(theta)
+    theta = (theta/180.) * math.pi
+
     for i in range(len(matrix)):
         for j in range(len(matrix)):
-            if i = j:
+            if i == j:
                 matrix[i].append(1)
-            elif i = 1 and j = 1:
+            elif i == 1 and j ==1:
                 matrix[i].append(math.cos(theta))
-            elif i = 1 and j = 2:
-                matrix[i].append(-1 * math.sin(theta))
-            elif i = 2 and j = 1:
+            elif i == 1 and j ==2:
                 matrix[i].append(math.sin(theta))
-            elif i = 2 and j = 2:
+            elif i == 2 and j ==1:
+                matrix[i].append(-1 * math.sin(theta))
+            elif i == 2 and j ==2:
                 matrix[i].append(math.cos(theta))
             else:
                 matrix[i].append(0)
     return matrix
-    pass
+
 
 def make_rotY( theta ):
     matrix = [[],[],[],[]]
-    theta = math.radians(theta)
+    theta = (theta/180.) * math.pi
     for i in range(len(matrix)):
         for j in range(len(matrix)):
-            if i = j:
+            if i == j:
                 matrix[i].append(1)
-            elif i = 0 and j = 0:
+            elif i == 0 and j == 0:
                 matrix[i].append(math.cos(theta))
-            elif i = 2 and j = 0:
-                matrix[i].append(-1 * math.sin(theta))
-            elif i = 0 and j = 2:
+            elif i == 2 and j == 0:
                 matrix[i].append(math.sin(theta))
-            elif i = 2 and j = 2:
+            elif i == 0 and j == 2:
+                matrix[i].append(-1 * math.sin(theta))
+            elif i == 2 and j == 2:
                 matrix[i].append(math.cos(theta))
             else:
                 matrix[i].append(0)
     return matrix
-    pass
+
 
 def make_rotZ( theta ):
     matrix = [[],[],[],[]]
-    theta = math.radians(theta)
+    theta = (theta/180.) * math.pi
     for i in range(len(matrix)):
         for j in range(len(matrix)):
-            if i = j:
+            if i == j:
                 matrix[i].append(1)
-            elif i = 0 and j = 0:
+            elif i == 0 and j ==0:
                 matrix[i].append(math.cos(theta))
-            elif i = 0 and j = 1:
-                matrix[i].append(-1 * math.sin(theta))
-            elif i = 1 and j = 0:
+            elif i == 0 and j ==1:
                 matrix[i].append(math.sin(theta))
-            elif i = 1 and j = 1:
+            elif i == 1 and j ==0:
+                matrix[i].append(-1 * math.sin(theta))
+            elif i == 1 and j ==1:
                 matrix[i].append(math.cos(theta))
             else:
                 matrix[i].append(0)
     return matrix
-    pass
+
 
 #print the matrix such that it looks like
 #the template in the top comment
@@ -138,6 +111,12 @@ def matrix_mult( m1, m2 ):
                             m1[2][r] * tmp[2] +
                             m1[3][r] * tmp[3])
         point+= 1
+
+def rfix(matrix):
+    for col in range(len(matrix)):
+        for row in range(len(matrix[0])):
+            matrix[col][row] = int(matrix[col][row])
+    return
 
 
 def new_matrix(rows = 4, cols = 4):
