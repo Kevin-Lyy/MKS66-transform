@@ -35,14 +35,11 @@ See the file script for an example of the file format
 def parse_file( fname, points, transform, screen, color ):
     with open(fname,"r") as r:
         filedata = r.read().split('\n')
-    #filedata = open(fname, 'r').read().split('\n')
     i = 0
     while i < len(filedata):
 
         if filedata[i] == "line":
             boi = [int(j) for j in filedata[i+1].split()]
-            #boi = filedata[i+1].split(' ')
-            #boi = [int(boi[i]) for i in range(len(boi))]
             add_edge(points,boi[0],boi[1],boi[2],boi[3],boi[4],boi[5])
             i += 2
 
@@ -81,6 +78,7 @@ def parse_file( fname, points, transform, screen, color ):
         elif filedata[i] == "apply":
             matrix_mult(transform,points)
             rfix(points)
+            #print(points)
             i += 1
 
         elif filedata[i] == "display":

@@ -17,62 +17,50 @@ def make_scale( x, y, z ):
 
 def make_rotX( theta ):
     matrix = [[],[],[],[]]
-    theta = (theta/180.) * math.pi
+    beta = ( theta / 180.0 ) * math.pi
 
     for i in range(len(matrix)):
         for j in range(len(matrix)):
             if i == j:
                 matrix[i].append(1)
-            elif i == 1 and j ==1:
-                matrix[i].append(math.cos(theta))
-            elif i == 1 and j ==2:
-                matrix[i].append(math.sin(theta))
-            elif i == 2 and j ==1:
-                matrix[i].append(-1 * math.sin(theta))
-            elif i == 2 and j ==2:
-                matrix[i].append(math.cos(theta))
             else:
                 matrix[i].append(0)
+    matrix[1][1] = math.cos(beta)
+    matrix[1][2] = math.sin(beta)
+    matrix[2][1] = -1 * math.sin(beta)
+    matrix[2][2] = math.cos(beta)
     return matrix
-
 
 def make_rotY( theta ):
     matrix = [[],[],[],[]]
-    theta = (theta/180.) * math.pi
+    beta = ( theta / 180.0 ) * math.pi
+
     for i in range(len(matrix)):
         for j in range(len(matrix)):
             if i == j:
                 matrix[i].append(1)
-            elif i == 0 and j == 0:
-                matrix[i].append(math.cos(theta))
-            elif i == 2 and j == 0:
-                matrix[i].append(math.sin(theta))
-            elif i == 0 and j == 2:
-                matrix[i].append(-1 * math.sin(theta))
-            elif i == 2 and j == 2:
-                matrix[i].append(math.cos(theta))
             else:
                 matrix[i].append(0)
+    matrix[0][0] = math.cos(beta)
+    matrix[2][0] = math.sin(beta)
+    matrix[0][2] = -1 * math.sin(beta)
+    matrix[2][2] = math.cos(beta)
     return matrix
-
 
 def make_rotZ( theta ):
     matrix = [[],[],[],[]]
-    theta = (theta/180.) * math.pi
+    beta = ( theta / 180.0 ) * math.pi
+
     for i in range(len(matrix)):
         for j in range(len(matrix)):
             if i == j:
                 matrix[i].append(1)
-            elif i == 0 and j ==0:
-                matrix[i].append(math.cos(theta))
-            elif i == 0 and j ==1:
-                matrix[i].append(math.sin(theta))
-            elif i == 1 and j ==0:
-                matrix[i].append(-1 * math.sin(theta))
-            elif i == 1 and j ==1:
-                matrix[i].append(math.cos(theta))
             else:
                 matrix[i].append(0)
+    matrix[0][0] = math.cos(beta)
+    matrix[0][1] = math.sin(beta)
+    matrix[1][0] = -1 * math.sin(beta)
+    matrix[1][1] = math.cos(beta)
     return matrix
 
 
